@@ -22,7 +22,9 @@ except urllib2.URLError, e:
         print e.reason
 
 #content_pattern = re.compile('<span class="e1">.*?<a href=".*?" onclick=".*?" target=".*?">(.*?)</a>', re.S)
-content_pattern = re.compile('<span class="e1">.*?>(.*?)</a>', re.S)
+#content_pattern = re.compile('<span class="e1">.*?>(.*?)</a>', re.S)
+#content_pattern = re.compile('span class="e3 cutWord">.*?>(.*?)</a>', re.S)
+content_pattern = re.compile('<span class="e1" title = "">(.*?)</span>', re.S)
 content_list = re.findall(content_pattern, html)
 for item in content_list:
     print item
