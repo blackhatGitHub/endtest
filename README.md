@@ -10,7 +10,7 @@ user_agent = 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko
 headers = { 'User-Agent' : user_agent }
  
 
-url = 'http://www.chinahr.com/sou/?city=36%2C400&keyword=%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%B7%A5%E7%A8%8B%E5%B8%88'
+url = 'http://www.chinahr.com/sou/?orderField=relate&keyword=%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%B7%A5%E7%A8%8B%E5%B8%88&city=36,400&page=1'
 try:
     request = urllib2.Request(url, headers=headers)
     response = urllib2.urlopen(request)
@@ -20,13 +20,27 @@ except urllib2.URLError, e:
         print e.code
     if hasattr(e,"reason"):
         print e.reason
+content_pattern = re.compile('<span class="e1">.*?>(.*?)</a>', re.S)
+content_list = re.findall(content_pattern, html)
+for item in content_list:
+    print item
 
-#content_pattern = re.compile('<span class="e1">.*?<a href=".*?" onclick=".*?" target=".*?">(.*?)</a>', re.S)
-#content_pattern = re.compile('<span class="e1">.*?>(.*?)</a>', re.S)
-#content_pattern = re.compile('span class="e3 cutWord">.*?>(.*?)</a>', re.S)
-#content_pattern = re.compile('<span class="e1" title = "">(.*?)</span>', re.S)
-#content_pattern = re.compile('<span class="e2">(.*?)</span>', re.S)
-content_pattern = re.compile('<span class="e3">.*?<em>(.*?)<em><i>|<i>.*?<em>(.*?)<em><i>|<i>.*?<em>(.*?)<em>.*?</span>', re.S)
+content_pattern = re.compile('span class="e3 cutWord">.*?>(.*?)</a>', re.S)
+content_list = re.findall(content_pattern, html)
+for item in content_list:
+    print item
+
+content_pattern = re.compile('<span class="e1" title = "">(.*?)</span>', re.S)
+content_list = re.findall(content_pattern, html)
+for item in content_list:
+    print item
+
+content_pattern = re.compile('<span class="e2">(.*?)</span>', re.S)
+content_list = re.findall(content_pattern, html)
+for item in content_list:
+    print item
+
+content_pattern = re.compile( '<em>(.*?)</em>', re.S)
 content_list = re.findall(content_pattern, html)
 for item in content_list:
     print item
