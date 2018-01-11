@@ -20,27 +20,11 @@ except urllib2.URLError, e:
         print e.code
     if hasattr(e,"reason"):
         print e.reason
-content_pattern = re.compile('<span class="e1">.*?>(.*?)</a>', re.S)
+content_pattern = re.compile('<span class="e1">.*?>(.*?)</a>.*?<span class="e3 cutWord">.*?>(.*?)</a>.*?<span class="e1" title = "">(.*?)</span>.*?<span class="e2">(.*?)</span>.*?<em>(.*?)</em>', re.S)
 content_list = re.findall(content_pattern, html)
 for item in content_list:
-    print "work unit : %s" %(item)
-
-content_pattern = re.compile('<span class="e3 cutWord">.*?>(.*?)</a>', re.S)
-content_list = re.findall(content_pattern, html)
-for item in content_list:
-    print "work place : %s" %(item)
-
-content_pattern = re.compile(r'<span class="e1" title = "">(.*?)</span>', re.S)
-content_list = re.findall(content_pattern, html)
-for item in content_list:
-    print "Location and education : %s" %(item)
-
-content_pattern = re.compile('<span class="e2">(.*?)</span>', re.S)
-content_list = re.findall(content_pattern, html)
-for item in content_list:
-    print "District and education : %s" %(item)
-
-content_pattern = re.compile( '<em>(.*?)</em>', re.S)
-content_list = re.findall(content_pattern, html)
-for item in content_list:
-    print "Interview time and salary : %s" %(item)
+    print item[0]
+    print item[1]
+    print item[2]
+    print item[3]
+    print item[4]
